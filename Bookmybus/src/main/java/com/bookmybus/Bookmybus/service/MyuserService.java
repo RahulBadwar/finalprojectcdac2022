@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -40,8 +39,8 @@ public class MyuserService {
 	@Autowired
 	private AddressDao addressDao;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	//@Autowired
+	//private PasswordEncoder passwordEncoder;
 	
 	
 	public String addUser(@Valid
@@ -51,11 +50,12 @@ public class MyuserService {
 		Myuser myuser=new Myuser();
 		
 		
+		
 		//beanutils to object mapping
 		//model mapppers
 		BeanUtils.copyProperties(user,myuser);
 		
-		myuser.setPassword(passwordEncoder.encode(user.getPassword()));
+		//myuser.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		Address address=new Address();
 		BeanUtils.copyProperties(user, address);

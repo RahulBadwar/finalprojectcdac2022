@@ -20,13 +20,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table
-public class Myuser implements UserDetails {
+public class Myuser  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,7 +64,7 @@ public class Myuser implements UserDetails {
 		this.userid = userid;
 	}
 
-	@Override
+	
 	public String getUsername() {
 		return email;
 	}
@@ -151,11 +148,11 @@ public class Myuser implements UserDetails {
 		this.address = address;
 	}
 
-	@Override
+	/*@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
+	 TODO Auto-generated method stub
 		
-		List<SimpleGrantedAuthority> authorities=new ArrayList<>();
+	List<SimpleGrantedAuthority> authorities=new ArrayList<>();
 		SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority("OWNER");
 		
 		authorities.add(simpleGrantedAuthority);
@@ -195,7 +192,7 @@ public class Myuser implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+*/
 	@Override
 	public String toString() {
 		return "Myuser [userid=" + userid + ", username=" + username + ", email=" + email + ", password=" + password

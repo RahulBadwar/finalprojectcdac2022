@@ -1,4 +1,4 @@
-
+/*
 package com.bookmybus.Bookmybus.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +45,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-} 
+} */
