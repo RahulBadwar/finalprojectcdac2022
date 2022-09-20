@@ -3,6 +3,8 @@ package com.bookmybus.Bookmybus.enity;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,12 +21,14 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int paymentid;
 	
+	
 	private PaymentStatus status;
 	
 	private double fareAmount;
 	
 	private LocalDate dateoftransaction;
 	
+	@Enumerated(EnumType.STRING)
 	private PaymentMethod paymentMethod;
 	
 	@OneToOne

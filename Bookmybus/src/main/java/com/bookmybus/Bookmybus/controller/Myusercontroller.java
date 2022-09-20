@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bookmybus.Bookmybus.dto.ChangepasswordDTO;
 import com.bookmybus.Bookmybus.dto.ErrorDTO;
+import com.bookmybus.Bookmybus.dto.LoginDTO;
 import com.bookmybus.Bookmybus.dto.MyuserDTO;
 import com.bookmybus.Bookmybus.enity.Address;
 import com.bookmybus.Bookmybus.enity.Myuser;
@@ -33,6 +34,24 @@ public class Myusercontroller {
 	@Autowired
 	private MyuserService service;
 	
+	
+	//for user login
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> logIn(@Valid @RequestBody LoginDTO loginDTO,BindingResult re){
+		
+		System.out.println(loginDTO);
+		
+		if(re.hasFieldErrors()) {
+			return new ResponseEntity<>(new ErrorDTO("Server side error", "Invalid input"), HttpStatus.BAD_REQUEST);
+
+		}
+		
+		//Myuser myuser=service.authenticateUser(loginDTO);
+		
+		return new ResponseEntity<>(service.authenticateUser(loginDTO), HttpStatus.FOUND);
+		
+	}
 	
 	//for user signup
 	@PostMapping("/signup")

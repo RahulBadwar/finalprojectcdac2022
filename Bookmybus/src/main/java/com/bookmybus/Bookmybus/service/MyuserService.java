@@ -12,6 +12,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -23,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bookmybus.Bookmybus.dao.AddressDao;
 import com.bookmybus.Bookmybus.dao.UserDao;
 import com.bookmybus.Bookmybus.dto.ChangepasswordDTO;
+import com.bookmybus.Bookmybus.dto.LoginDTO;
 import com.bookmybus.Bookmybus.dto.MyuserDTO;
 import com.bookmybus.Bookmybus.enity.Address;
 import com.bookmybus.Bookmybus.enity.Myuser;
 import com.bookmybus.Bookmybus.exception.AdduserExpection;
+import com.bookmybus.Bookmybus.exception.UserNotFoundException;
 
 
 
@@ -39,8 +43,8 @@ public class MyuserService {
 	@Autowired
 	private AddressDao addressDao;
 	
-	//@Autowired
-	//private PasswordEncoder passwordEncoder;
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	public String addUser(@Valid
@@ -57,12 +61,14 @@ public class MyuserService {
 		
 		//myuser.setPassword(passwordEncoder.encode(user.getPassword()));
 		
-		Address address=new Address();
-		BeanUtils.copyProperties(user, address);
+		//Address address=new Address();
+		//BeanUtils.copyProperties(user, address);
 		
-		myuser.setAddress(address);
+		//myuser.setAddress(address);
 		
-		address.setUser(myuser);
+		//address.setUser(myuser);
+		
+		myuser.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		
 		dao.save(myuser);
@@ -168,6 +174,35 @@ public class MyuserService {
 			return "No user with such id";
 		}
 		return "User deleted successfully";
+	}
+
+	public MyuserDTO authenticateUser(@Valid LoginDTO loginDTO) {
+		// TODO Auto-generated method stub
+		Myuser myuser=null;
+		
+		
+			 myuser=dao.findByEmail(loginDTO.getEmail()).get();
+			
+			if(myuser==null)
+				throw new UserNotFoundException("inavalid creadianls");
+			
+			boolean match=loginDTO.getPassword().equals(myuser.getPassword());
+			if(!match)
+				throw new UserNotFoundException("inavalid creadianls");
+			
+			System.out.println(myuser);
+			System.out.println(match);
+			
+			MyuserDTO myuserDTO=new MyuserDTO();
+			BeanUtils.copyProperties(myuser, myuserDTO);
+		
+			// TODO: handle exception
+			
+		//	new UserNotFoundException("inavalid creadianls");
+			//return new ResponseEntity<T>(new UserNotFoundException("inavalid creadianls"), null)
+		
+		
+		return myuserDTO;
 	}
 	
 

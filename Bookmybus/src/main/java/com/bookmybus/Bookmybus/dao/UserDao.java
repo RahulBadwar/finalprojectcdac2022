@@ -17,5 +17,5 @@ public interface UserDao extends JpaRepository<Myuser, Integer> {
 	//@Query(
 			  //value = "SELECT * FROM myusers u WHERE u.email = ?1", 
 			  //nativeQuery = true)
-	public Myuser findByEmail(String email);
+	public Optional<Myuser> findByEmail(String email);
 }
