@@ -20,19 +20,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table
-public class Myuser implements UserDetails {
+public class Myuser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userid;
 	
-	private String username;
+	//private String username;
 	
 	@Column(unique = true)
 	private String email;
@@ -43,6 +40,7 @@ public class Myuser implements UserDetails {
 	
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	
 	private LocalDate dob;
 	
 	@Enumerated(EnumType.STRING)
@@ -67,14 +65,12 @@ public class Myuser implements UserDetails {
 		this.userid = userid;
 	}
 
-	@Override
+	//@Override
 	public String getUsername() {
 		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = email;
-	}
+	
 
 	
 	public String getEmail() {
@@ -152,53 +148,8 @@ public class Myuser implements UserDetails {
 	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		
-		List<SimpleGrantedAuthority> authorities=new ArrayList<>();
-		SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority("OWNER");
-		
-		authorities.add(simpleGrantedAuthority);
-		
-		simpleGrantedAuthority=new SimpleGrantedAuthority("ADMIN");
-		authorities.add(simpleGrantedAuthority);
-		
-		simpleGrantedAuthority=new SimpleGrantedAuthority("PASSANGER");
-		
-		authorities.add(simpleGrantedAuthority);
-		
-		System.out.println(authorities);
-		
-		return authorities;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Myuser [userid=" + userid + ", username=" + username + ", email=" + email + ", password=" + password
+		return "Myuser [userid=" + userid  + ", email=" + email + ", password=" + password
 				+ ", mobile=" + mobile + ", gender=" + gender + ", dob=" + dob + ", role=" + role + ", autho=" + autho
 				+ ", bookings=" + bookings + "]";
 	}

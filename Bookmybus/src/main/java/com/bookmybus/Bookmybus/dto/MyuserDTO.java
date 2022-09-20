@@ -17,6 +17,8 @@ import com.bookmybus.Bookmybus.enity.Role;
 
 public class MyuserDTO {
 
+	private int userid;
+	
 	@NotBlank(message = "Name cannot be blank")
     private String username;
 	
@@ -146,6 +148,14 @@ public class MyuserDTO {
 		return "MyuserDTO [username=" + username + ", email=" + email + ", password=" + password + ", mobile=" + mobile
 				+ ", gender=" + gender + ", dob=" + dob + ", role=" + role + ", street=" + street + ", city=" + city
 				+ ", state=" + state + ", pincode=" + pincode + "]";
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	
 	
