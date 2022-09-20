@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoCheck {
 
-	@RequestMapping("/home")
+	@RequestMapping("/home1")
 	public String demo() {
 		
 		return "in demo";

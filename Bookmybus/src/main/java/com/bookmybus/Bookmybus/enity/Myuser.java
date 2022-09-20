@@ -49,9 +49,7 @@ public class Myuser {
 	@Enumerated(EnumType.STRING)
 	private Autherizationstatus autho;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn(name = "addressId")
-	private Address address;
+	
 	
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -139,13 +137,7 @@ public class Myuser {
 		this.autho = autho;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 
 	@Override
 	public String toString() {

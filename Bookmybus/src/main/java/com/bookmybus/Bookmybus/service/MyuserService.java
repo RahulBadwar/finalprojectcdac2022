@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bookmybus.Bookmybus.dao.AddressDao;
+
 import com.bookmybus.Bookmybus.dao.UserDao;
 import com.bookmybus.Bookmybus.dto.ChangepasswordDTO;
 import com.bookmybus.Bookmybus.dto.LoginDTO;
 import com.bookmybus.Bookmybus.dto.MyuserDTO;
-import com.bookmybus.Bookmybus.enity.Address;
+
 import com.bookmybus.Bookmybus.enity.Myuser;
 import com.bookmybus.Bookmybus.exception.AdduserExpection;
 import com.bookmybus.Bookmybus.exception.UserNotFoundException;
@@ -40,8 +40,7 @@ public class MyuserService {
 	@Autowired
 	private UserDao dao;
 	
-	@Autowired
-	private AddressDao addressDao;
+	
 	
     @Autowired
 	private PasswordEncoder passwordEncoder;
@@ -114,12 +113,12 @@ public class MyuserService {
 		try {
 		Myuser myuser=dao.findById(id).get();
 		
-		Address address=myuser.getAddress();
 		
-		BeanUtils.copyProperties(user, address);
+		
+		
 		
 		BeanUtils.copyProperties(user, myuser);
-		myuser.setAddress(address);
+		
 		
 		
 	dao.save(myuser);
@@ -148,7 +147,7 @@ public class MyuserService {
 			MyuserDTO myuserDTO=new MyuserDTO();
 			
 			BeanUtils.copyProperties(myuser, myuserDTO);
-			BeanUtils.copyProperties(myuser.getAddress(),myuserDTO);
+			//BeanUtils.copyProperties(myuser.getAddress(),myuserDTO);
 			
 			mylist.add(myuserDTO);
 			

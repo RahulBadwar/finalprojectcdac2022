@@ -21,7 +21,7 @@ import com.bookmybus.Bookmybus.dto.ChangepasswordDTO;
 import com.bookmybus.Bookmybus.dto.ErrorDTO;
 import com.bookmybus.Bookmybus.dto.LoginDTO;
 import com.bookmybus.Bookmybus.dto.MyuserDTO;
-import com.bookmybus.Bookmybus.enity.Address;
+
 import com.bookmybus.Bookmybus.enity.Myuser;
 import com.bookmybus.Bookmybus.enity.Role;
 import com.bookmybus.Bookmybus.service.MyuserService;

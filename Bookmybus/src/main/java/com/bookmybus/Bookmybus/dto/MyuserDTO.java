@@ -43,17 +43,13 @@ public class MyuserDTO {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@NotBlank(message = "street cannot be blank")
-	private String street;
 	
-	@NotBlank(message = "city cannot be blank")
-	private String city;
 	
-	@NotBlank(message = "state cannot be blank")
-	private String state;
 	
-	@NotBlank(message = "pincode cannot be blank")
-	private String pincode;
+	
+	
+	
+	
 
 	public String getUsername() {
 		return username;
@@ -111,43 +107,18 @@ public class MyuserDTO {
 		this.role = role;
 	}
 
-	public String getStreet() {
-		return street;
-	}
+	
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
 
-	public String getCity() {
-		return city;
-	}
+	
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getPincode() {
-		return pincode;
-	}
-
-	public void setPincode(String pincode) {
-		this.pincode = pincode;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "MyuserDTO [username=" + username + ", email=" + email + ", password=" + password + ", mobile=" + mobile
-				+ ", gender=" + gender + ", dob=" + dob + ", role=" + role + ", street=" + street + ", city=" + city
-				+ ", state=" + state + ", pincode=" + pincode + "]";
+				+ ", gender=" + gender + ", dob=" + dob + ", role=" + role + ", street=" + ", city=" 
+				+ ", state="  + ", pincode=" + "]";
 	}
 
 	public int getUserid() {
