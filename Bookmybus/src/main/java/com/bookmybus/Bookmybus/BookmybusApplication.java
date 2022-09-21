@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bookmybus.Bookmybus.dao.UserDao;
-import com.bookmybus.Bookmybus.enity.Address;
 import com.bookmybus.Bookmybus.enity.Myuser;
 import com.bookmybus.Bookmybus.enity.Role;
 import com.bookmybus.Bookmybus.service.MyuserService;
