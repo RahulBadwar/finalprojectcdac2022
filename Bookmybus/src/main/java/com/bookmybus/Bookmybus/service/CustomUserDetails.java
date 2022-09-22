@@ -10,8 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.bookmybus.Bookmybus.enity.Myuser;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 @ToString
+@Getter
 public class CustomUserDetails implements UserDetails {
 	private Myuser user;
 

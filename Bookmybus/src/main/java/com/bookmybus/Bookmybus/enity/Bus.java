@@ -16,22 +16,29 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table
+@Getter
+@Setter
+@ToString
 public class Bus {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int busid;
 	
-	private String busno;
+	private String busNumber;
 	
-	private int totalseat;
+	private int totalSeats;
 	
 	
 	private int bookedseat;
 	
-	private String busname;
+	private String busName;
 	
 	private int busFare;
 	
@@ -51,84 +58,6 @@ public class Bus {
 	
 	
 
-	public int getBusid() {
-		return busid;
-	}
-
-	public int getBusFare() {
-		return busFare;
-	}
-
-	public void setBusFare(int busFare) {
-		this.busFare = busFare;
-	}
-
-	public void setBusid(int busid) {
-		this.busid = busid;
-	}
-
-	public Myuser getUser() {
-		return user;
-	}
-
-	public void setUser(Myuser user) {
-		this.user = user;
-	}
-
-	public String getBusno() {
-		return busno;
-	}
-
-	public void setBusno(String busno) {
-		this.busno = busno;
-	}
-
-	public int getTotalseat() {
-		return totalseat;
-	}
-
-	public void setTotalseat(int totalseat) {
-		this.totalseat = totalseat;
-	}
-
-	public int getBookedseat() {
-		return bookedseat;
-	}
-
-	public void setBookedseat(int bookedseat) {
-		this.bookedseat = bookedseat;
-	}
-
-	public String getBusname() {
-		return busname;
-	}
-
-	public void setBusname(String busname) {
-		this.busname = busname;
-	}
-
-	public List<Booking> getBookings() {
-		return bookings;
-	}
-
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
-
-	public Route getRoute() {
-		return route;
-	}
-
-	public void setRoute(Route route) {
-		this.route = route;
-	}
-
-	@Override
-	public String toString() {
-		return "Bus [busid=" + busid + ", busno=" + busno + ", totalseat=" + totalseat + ", bookedseat=" + bookedseat
-				+ ", busname=" + busname + ", busFare=" + busFare + ", bookings=" + bookings + ", route=" + route
-				+ ", user=" + user + "]";
-	}
 	
 	
 	

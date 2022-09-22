@@ -10,6 +10,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.bookmybus.Bookmybus.enity.BookingStatus;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class BookingDTO {
 
 	//@NotBlank(message = "userid cannot be blank")
@@ -65,26 +72,7 @@ public class BookingDTO {
 	}
 
 
-	public LocalDate getDateofJourny() {
-		return dateofJourny;
-	}
-
-
-	public void setDateofJourny(LocalDate dateofJourny) {
-		this.dateofJourny = dateofJourny;
-	}
-
-
-	public LocalDate getDateofBooking() {
-		return dateofBooking;
-	}
-
-
-	public void setDateofBooking(LocalDate dateofBooking) {
-		this.dateofBooking = dateofBooking;
-	}
-
-
+	
 	public BookingStatus getBookingstatus() {
 		return bookingstatus;
 	}
@@ -105,12 +93,7 @@ public class BookingDTO {
 	}
 
 
-	@Override
-	public String toString() {
-		return "BookingDTO [userid=" + userid + ", seatNumber=" + seatNumber + ", dateofJourny=" + dateofJourny
-				+ ", dateofBooking=" + dateofBooking + ", bookingstatus=" + bookingstatus + ", fareAmount=" + fareAmount
-				+ "]";
-	}
+	
 	
 	
 }

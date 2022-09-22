@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class RouteDTO {
 
+	private int routeid;
 
 	@NotBlank(message = "Source can not be blank")
 	private String source;
@@ -30,6 +31,14 @@ public class RouteDTO {
 	@Override
 	public String toString() {
 		return "RouteDTO [source=" + source + ", destination=" + destination + "]";
+	}
+
+	public int getRouteid() {
+		return routeid;
+	}
+
+	public void setRouteid(int routeid) {
+		this.routeid = routeid;
 	}
 	
 	

@@ -1,5 +1,8 @@
 package com.bookmybus.Bookmybus.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -33,6 +36,23 @@ public class RouteService {
 		}
 		
 		
+	}
+
+	public List<RouteDTO> getRoutes() {
+		// TODO Auto-generated method stub
+		List<Route> list=routeDao.findAll();
+		
+		List<RouteDTO> list1=new ArrayList<>();
+		
+		RouteDTO dto=null;
+		
+		for(Route route:list) {
+			dto=new RouteDTO();
+			BeanUtils.copyProperties(route, dto);
+			list1.add(dto);
+		}
+		
+		return list1;
 	}
 	
 	
