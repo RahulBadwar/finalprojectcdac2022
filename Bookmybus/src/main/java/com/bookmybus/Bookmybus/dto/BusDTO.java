@@ -12,6 +12,8 @@ import lombok.ToString;
 @ToString
 public class BusDTO {
 
+	private int userid;
+	
 	@NotBlank(message = "Bus number cannot be blank")
     private String busNumber;
 	
@@ -19,7 +21,7 @@ public class BusDTO {
 	private int totalSeats;
 	
 	
-	private int bookedseat=0;
+	
 	
 	@NotBlank
 	private String busName;
@@ -36,14 +38,7 @@ public class BusDTO {
 
 	
 
-	public int getBookedseat() {
-		return bookedseat;
-	}
-
-	public void setBookedseat(int bookedseat) {
-		this.bookedseat = bookedseat;
-	}
-
+	
 	
 
 	

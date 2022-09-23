@@ -44,7 +44,7 @@ public class BusController {
 
 		}
 		
-		return new ResponseEntity<>(busService.addBus(busDTO), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(busService.addBus(busDTO), HttpStatus.OK);
 	}
 	
 	@GetMapping("/viwe-bus/{id}")

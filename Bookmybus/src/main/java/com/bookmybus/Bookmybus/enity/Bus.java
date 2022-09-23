@@ -20,6 +20,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
+
 @Entity
 @Table
 @Getter
@@ -36,11 +38,11 @@ public class Bus {
 	private int totalSeats;
 	
 	
-	private int bookedseat;
+	private int bookedSeat;
 	
 	private String busName;
 	
-	private int busFare;
+	private double busFare;
 	
 	
 	@OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -15,12 +15,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.bookmybus.Bookmybus.enity.Gender;
 import com.bookmybus.Bookmybus.enity.Role;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class MyuserDTO {
 
 	private int userid;
 	
-	@NotBlank(message = "Name cannot be blank")
-    private String username;
+	
 	
 	@NotBlank(message = "Email is required")
 	@Length(min = 5,max = 40,message = "Invalid Email length")
@@ -51,14 +57,7 @@ public class MyuserDTO {
 	
 	
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -114,12 +113,7 @@ public class MyuserDTO {
 
 	
 
-	@Override
-	public String toString() {
-		return "MyuserDTO [username=" + username + ", email=" + email + ", password=" + password + ", mobile=" + mobile
-				+ ", gender=" + gender + ", dob=" + dob + ", role=" + role + ", street=" + ", city=" 
-				+ ", state="  + ", pincode=" + "]";
-	}
+	
 
 	public int getUserid() {
 		return userid;
