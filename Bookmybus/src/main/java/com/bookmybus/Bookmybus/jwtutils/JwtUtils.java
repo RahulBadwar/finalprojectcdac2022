@@ -53,6 +53,7 @@ public class JwtUtils {
 			return true;
 		} catch (Exception e) {
 			log.error("Invalid JWT : " + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 
 		return false;
