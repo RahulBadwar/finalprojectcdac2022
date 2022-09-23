@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bookmybus.Bookmybus.dto.AuthResp;
 import com.bookmybus.Bookmybus.dto.LoginDTO;
 import com.bookmybus.Bookmybus.dto.MyuserDTO;
+import com.bookmybus.Bookmybus.enity.Myuser;
 import com.bookmybus.Bookmybus.jwtutils.JwtUtils;
+import com.bookmybus.Bookmybus.service.CustomUserDetails;
 import com.bookmybus.Bookmybus.service.MyuserService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin
 @Slf4j
 public class SignInSignUpController {
 //dep : JWT utils : for generating JWT
@@ -49,7 +53,22 @@ public class SignInSignUpController {
 			// authenticate the credentials
 			Authentication authenticatedDetails = manager.authenticate(authToken);
 			// => auth succcess
-			return ResponseEntity.ok(new AuthResp("Auth successful!", utils.generateJwtToken(authenticatedDetails)));
+			System.out.println("line 54 "+authenticatedDetails);
+			
+			CustomUserDetails details=(CustomUserDetails) authenticatedDetails.getPrincipal();
+			
+			Myuser user=details.getUser();
+			
+		AuthResp resp=	new AuthResp("Auth successful!", utils.generateJwtToken(authenticatedDetails));
+			
+		resp.setUser(user);
+		
+		
+		
+			//return ResponseEntity.ok(new AuthResp("Auth successful!", utils.generateJwtToken(authenticatedDetails)));
+			
+			
+			return ResponseEntity.ok(resp);
 		} catch (BadCredentialsException e) { // lab work : replace this by a method in global exc handler
 			// send back err resp code
 			System.out.println("err "+e);
