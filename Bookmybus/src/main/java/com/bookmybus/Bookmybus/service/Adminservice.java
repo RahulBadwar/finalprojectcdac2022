@@ -1,5 +1,8 @@
 package com.bookmybus.Bookmybus.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -7,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import com.bookmybus.Bookmybus.dao.BusDao;
 import com.bookmybus.Bookmybus.dao.BusScheduleDao;
 import com.bookmybus.Bookmybus.dao.RouteDao;
+import com.bookmybus.Bookmybus.dto.BusScheduleResponse;
 import com.bookmybus.Bookmybus.dto.ScheduleDTO;
 import com.bookmybus.Bookmybus.enity.Bus;
 import com.bookmybus.Bookmybus.enity.BusSchedule;
@@ -62,5 +67,15 @@ public class Adminservice {
 			}
 		
 	}
+
+	
+	public BusScheduleResponse getScheduleDetails() {
+		List<Bus> buses = new ArrayList<>();
+		List<Route> routes = new ArrayList<>();
+		buses = busDao.findAll();
+		routes = routeDao.findAll();
+		return new BusScheduleResponse(buses, routes);
+	}
+
 
 }
