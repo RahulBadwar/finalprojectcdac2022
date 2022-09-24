@@ -1,12 +1,14 @@
 package com.bookmybus.Bookmybus.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.bookmybus.Bookmybus.dao.BookingDao;
 import com.bookmybus.Bookmybus.dao.BusDao;
@@ -66,6 +68,18 @@ public class BookingService {
 		}
 		
 		return "Booking added";
+	}
+
+
+
+	public List<Booking> myBookings(int userid) {
+		// TODO Auto-generated method stub
+		
+		Myuser myuser=userDao.findById(userid).get();
+		
+		List<Booking> list=bookingDao.myBookings(userid);
+		
+		return list;
 	}
 	
 	
