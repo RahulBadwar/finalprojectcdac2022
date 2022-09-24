@@ -1,5 +1,9 @@
 package com.bookmybus.Bookmybus.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -7,11 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import com.bookmybus.Bookmybus.dao.BusDao;
+import com.bookmybus.Bookmybus.dao.BusScheduleDao;
+import com.bookmybus.Bookmybus.dao.RouteDao;
 import com.bookmybus.Bookmybus.dao.UserDao;
 import com.bookmybus.Bookmybus.dto.BusDTO;
 import com.bookmybus.Bookmybus.enity.Bus;
+import com.bookmybus.Bookmybus.enity.BusSchedule;
 import com.bookmybus.Bookmybus.enity.Myuser;
+import com.bookmybus.Bookmybus.enity.Route;
 
 @Service
 public class BusService {
@@ -21,6 +30,12 @@ public class BusService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private RouteDao routeDao;
+	
+	@Autowired
+	private BusScheduleDao busScheduleDao;
 	
 	public String addBus(@Valid BusDTO busDTO) {
 		// TODO Auto-generated method stub
@@ -61,6 +76,17 @@ public class BusService {
 		}
 		
 		return bus;
+	}
+
+	public List<BusSchedule> fetchBuses(String source, String destination, LocalDate dateOfJourney){    //) {
+		Route route = routeDao.findBySourceAndDestination(source, destination).get();
+		List<BusSchedule> busSchedules = busScheduleDao.findByRoute(route);
+		List<BusSchedule> response = new ArrayList<>();
+		for (BusSchedule busSchedule : busSchedules) {
+			//if(busSchedule.getDeptTime().toLocalDate().isAfter(dateOfJourney))
+				response.add(busSchedule); 
+		}
+		return response;
 	}
 
 	

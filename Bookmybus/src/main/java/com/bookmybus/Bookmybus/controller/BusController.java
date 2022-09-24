@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.bookmybus.Bookmybus.dto.BusDTO;
 import com.bookmybus.Bookmybus.dto.ErrorDTO;
 import com.bookmybus.Bookmybus.dto.ScheduleDTO;
+import com.bookmybus.Bookmybus.dto.ViewBusDTO;
 import com.bookmybus.Bookmybus.service.Adminservice;
 import com.bookmybus.Bookmybus.service.BusService;
 
@@ -53,6 +55,14 @@ public class BusController {
 		return new ResponseEntity<>(busService.viweBus(id),HttpStatus.OK);		
 	}
 	
+	
+	@PostMapping("/view-bus")
+	public ResponseEntity<?> viewBus(@Valid @RequestBody ViewBusDTO vb, BindingResult br) {
+		System.out.println("in view bus " + vb);
+		if (br.hasFieldErrors())
+			return new ResponseEntity<>(new ErrorDTO("Server side error", "Invalid input"), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(busService.fetchBuses(vb.getSource(), vb.getDestination(), vb.getDateOfJourney()), HttpStatus.OK); //
+	}
 	
 	
 		
