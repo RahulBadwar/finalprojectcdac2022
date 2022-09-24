@@ -44,6 +44,8 @@ public class Bus {
 	
 	private String busName;
 	
+	private String busType;
+	
 	private double busFare;
 	
 	@JsonIgnore

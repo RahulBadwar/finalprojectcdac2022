@@ -20,7 +20,7 @@ public class BusDTO {
 	//@NotBlank(message = "Total seat cannot be blank")
 	private int totalSeats;
 	
-	
+	private String busType;
 	
 	
 	@NotBlank

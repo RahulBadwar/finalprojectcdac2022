@@ -1,5 +1,7 @@
 package com.bookmybus.Bookmybus.service;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -8,9 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.bookmybus.Bookmybus.dao.BookingDao;
 import com.bookmybus.Bookmybus.dao.BusDao;
+import com.bookmybus.Bookmybus.dao.RouteDao;
+import com.bookmybus.Bookmybus.dao.UserDao;
 import com.bookmybus.Bookmybus.dto.BookingDTO;
 import com.bookmybus.Bookmybus.enity.Booking;
 import com.bookmybus.Bookmybus.enity.Bus;
+import com.bookmybus.Bookmybus.enity.Myuser;
+import com.bookmybus.Bookmybus.enity.Route;
 
 @Service
 public class BookingService {
@@ -21,6 +27,12 @@ public class BookingService {
 	
 	@Autowired
 	private BusDao busDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private RouteDao routeDao;
 	
 	
 
@@ -36,7 +48,13 @@ public class BookingService {
 			
 			Bus bus=busDao.findById(bookingDTO.getBusid()).orElse(null);
 			
+			//Myuser myuser=userDao.findById(bookingDTO.getUserid()).get();
 		
+			booking.setRoute(bus.getRoute());
+			
+			//booking.setUser(myuser);
+			
+			booking.setDateofBooking(LocalDate.now());
 			
 			booking.setBus(bus);
 			

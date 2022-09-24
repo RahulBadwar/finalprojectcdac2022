@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table
@@ -51,7 +53,7 @@ public class Myuser {
 	
 	
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Booking> bookings = new ArrayList<>();
 
