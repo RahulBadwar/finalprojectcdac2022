@@ -48,11 +48,11 @@ public class BookingService {
 			
 			Bus bus=busDao.findById(bookingDTO.getBusid()).orElse(null);
 			
-			//Myuser myuser=userDao.findById(bookingDTO.getUserid()).get();
+			Myuser myuser=userDao.findById(bookingDTO.getUserid()).get();
 		
 			booking.setRoute(bus.getRoute());
 			
-			//booking.setUser(myuser);
+			booking.setUser(myuser);
 			
 			booking.setDateofBooking(LocalDate.now());
 			
