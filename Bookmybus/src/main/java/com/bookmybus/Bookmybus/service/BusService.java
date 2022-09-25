@@ -100,5 +100,12 @@ public class BusService {
 		return response;
 	}
 
+	public List<Bus> fetchBuses1(int userid) {
+		// TODO Auto-generated method stub
+		
+		List<Bus> list=busDao.findByMyuser(userid);
+		return list;
+	}
+
 	
 }

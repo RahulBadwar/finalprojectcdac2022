@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,10 +62,15 @@ public class BookingController {
 		return new ResponseEntity<>(bookingService.myBookings(userid),HttpStatus.OK);
 	}
 	
-	//@PostMapping("/view-bookings-owner")
-	//public ResponseEntity<?> vivwBooking(@RequestParam int busId){
+	@GetMapping("view-bookings")
+	public ResponseEntity<?> allBookings(){
 		
-		//return  new ResponseEntity<T>(null, null)
-	//}
+		return new ResponseEntity<>(bookingService.allBookings(),HttpStatus.OK);
+	}
+	@PutMapping("/view-bookings-owner")
+	public ResponseEntity<?> ownerBookings(@RequestBody int userid){
+		
+		return new ResponseEntity<>(bookingService.ownerBookings(userid),HttpStatus.OK);
+	}
 	
 }

@@ -65,5 +65,12 @@ public class BusController {
 	}
 	
 	
+	@PostMapping("/view-bus1")
+	public ResponseEntity<?> viewBus1(@RequestBody int userid) {
+		
+		return new ResponseEntity<>(busService.fetchBuses1(userid), HttpStatus.OK); //
+	}
+	
+	
 		
 }

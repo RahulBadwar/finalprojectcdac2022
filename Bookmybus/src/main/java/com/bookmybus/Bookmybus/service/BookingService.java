@@ -1,6 +1,8 @@
 package com.bookmybus.Bookmybus.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -50,15 +52,23 @@ public class BookingService {
 			
 			Bus bus=busDao.findById(bookingDTO.getBusid()).orElse(null);
 			
+			bus.setBookedSeat(bus.getBookedSeat()+1);
+			
+			busDao.save(bus);
+			
 			Myuser myuser=userDao.findById(bookingDTO.getUserid()).get();
 		
 			booking.setRoute(bus.getRoute());
+			
+			booking.setFareAmount(bus.getBusFare());
 			
 			booking.setUser(myuser);
 			
 			booking.setDateofBooking(LocalDate.now());
 			
 			booking.setBus(bus);
+			
+			System.out.println(booking.getFareAmount());
 			
 			bookingDao.save(booking);
 		}catch (Exception e) {
@@ -80,6 +90,34 @@ public class BookingService {
 		List<Booking> list=bookingDao.myBookings(userid);
 		
 		return list;
+	}
+
+
+
+	public List<Booking> allBookings() {
+		// TODO Auto-generated method stub
+		List<Booking> list=bookingDao.findAll();
+		return list;
+	}
+
+
+
+	public List<Booking> ownerBookings(int userid) {
+		// TODO Auto-generated method stub
+		
+		Myuser myuser=userDao.findById(userid).get();
+		
+		List<Booking> re=new ArrayList<>();
+		
+		List<Bus> b=busDao.findByMyuser(myuser.getUserid());
+		
+		for (Bus bus : b) {
+			
+			List<Booking> b1=bookingDao.FindByBus(bus.getBusid());
+			re.addAll(b1);
+		}
+		
+		return re;
 	}
 	
 	
