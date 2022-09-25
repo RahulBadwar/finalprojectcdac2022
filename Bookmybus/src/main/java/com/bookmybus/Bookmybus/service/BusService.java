@@ -1,6 +1,7 @@
 package com.bookmybus.Bookmybus.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,17 @@ public class BusService {
 		List<BusSchedule> busSchedules = busScheduleDao.findByRoute(route);
 		List<BusSchedule> response = new ArrayList<>();
 		for (BusSchedule busSchedule : busSchedules) {
-			//if(busSchedule.getDeptTime().toLocalDate().isAfter(dateOfJourney))
+			LocalDateTime m=busSchedule.getDepttime();
+			
+			LocalDate n=m.toLocalDate();
+			
+			System.out.println("m is "+m);
+			
+			System.out.println("n is "+n);
+			
+			System.out.println(busSchedule);
+			
+			if(n.equals(dateOfJourney))
 				response.add(busSchedule); 
 		}
 		return response;

@@ -14,11 +14,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table
 @Setter
 @Getter
+@ToString
 public class BusSchedule {
 
 	@Id
