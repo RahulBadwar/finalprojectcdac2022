@@ -44,6 +44,9 @@ public class MyuserService {
 	
     @Autowired
 	private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private EmailSenderService emailSenderService;
 	
 	
 	public String addUser(@Valid
@@ -69,6 +72,14 @@ public class MyuserService {
 		
 		myuser.setPassword(passwordEncoder.encode(user.getPassword()));
 		
+		String mess="Email-"+user.getEmail()
+		+"\n" +"Password-"+user.getPassword()+
+		"\n"+"Gender-"+user.getGender()+"\n"+
+		"Role-"+user.getRole()+"\n"+
+		"Mobile--"+user.getMobile();
+		//emailSenderService.
+		
+		emailSenderService.sendEmail(mess,"Registration successfull on bookmybus", user.getEmail(), "bookmybuscdac@gmail.com");
 		
 		dao.save(myuser);
 		

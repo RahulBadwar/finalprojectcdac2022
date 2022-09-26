@@ -39,6 +39,10 @@ public class BookingService {
 	private RouteDao routeDao;
 	
 	
+	@Autowired
+    private EmailSenderService emailSenderService;
+	
+	
 
 	public Object addBooking(@Valid BookingDTO bookingDTO) {
 		
@@ -69,6 +73,17 @@ public class BookingService {
 			booking.setBus(bus);
 			
 			System.out.println(booking.getFareAmount());
+			
+			String mess="Email-"+myuser.getEmail()
+			+"\n" +
+			"\n"+"Gender-"+myuser.getGender()+"\n"+"\n"+
+			"Mobile--"+myuser.getMobile()
+			+"Bus Name--"+bus.getBusName()+"\n"+
+			"From--"+bus.getRoute().getSource()+"\n"+
+			"To--"+bus.getRoute().getDestination()+
+			"\n"+"Date of journy-"+bookingDTO.getDateofJourny();
+			
+			emailSenderService.sendEmail(mess, "Booking Information", myuser.getEmail(), "bookmybuscdac@gmail.com");
 			
 			bookingDao.save(booking);
 		}catch (Exception e) {

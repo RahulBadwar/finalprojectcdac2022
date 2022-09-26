@@ -20,5 +20,8 @@ public interface BusDao extends JpaRepository<Bus,Integer>{
 	List<Bus> findByMyuser(@Param("id") int userid);
 
 	
+	//List<Bus> findByUserid(int userid);
+
+	
 
 }
