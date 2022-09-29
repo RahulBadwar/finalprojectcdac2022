@@ -107,5 +107,14 @@ public class BusService {
 		return list;
 	}
 
+	public String removeBus(int busid) {
+		// TODO Auto-generated method stub
+		Bus bus=busDao.findById(busid).get();
+		
+		bus.setRoute(null);
+		//bus.set
+		
+		return "deleted successfully";
 	
+	}
 }

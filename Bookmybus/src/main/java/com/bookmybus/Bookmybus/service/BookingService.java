@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.bookmybus.Bookmybus.dao.BookingDao;
 import com.bookmybus.Bookmybus.dao.BusDao;
@@ -21,8 +21,10 @@ import com.bookmybus.Bookmybus.enity.Booking;
 import com.bookmybus.Bookmybus.enity.Bus;
 import com.bookmybus.Bookmybus.enity.Myuser;
 import com.bookmybus.Bookmybus.enity.Route;
+import com.bookmybus.Bookmybus.exception.DateOfJournrypassed;
 
 @Service
+@Transactional
 public class BookingService {
 
 	@Autowired
@@ -133,6 +135,38 @@ public class BookingService {
 		}
 		
 		return re;
+	}
+
+
+
+	public Object myBookings1(int userid) {
+		// TODO Auto-generated method stub
+		
+		//bookingDao.deleteById(userid);
+		
+	LocalDate d=LocalDate.now();
+	
+	
+		
+		Booking booking=bookingDao.findById(userid).get();
+		
+		//if(d.isBefore(booking.getDateofJourny())) {
+		
+		//booking.setBus(null);
+		
+		//booking.setRoute(null);
+		
+	//	booking.setUser(null);
+		
+		//bookingDao.save(booking);
+		
+		bookingDao.deleteById(userid);
+		
+		
+		//bookingDao.de
+		return "deleted";
+		
+		
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,10 +68,18 @@ public class BookingController {
 		
 		return new ResponseEntity<>(bookingService.allBookings(),HttpStatus.OK);
 	}
+	
+	
 	@PutMapping("/view-bookings-owner")
 	public ResponseEntity<?> ownerBookings(@RequestBody int userid){
 		
 		return new ResponseEntity<>(bookingService.ownerBookings(userid),HttpStatus.OK);
 	}
 	
+	
+	@DeleteMapping("my-bookings/{userid}")
+	public ResponseEntity<?> myBookings1(@PathVariable int userid ){
+		
+		return new ResponseEntity<>(bookingService.myBookings1(userid),HttpStatus.OK);
+	}
 }

@@ -11,7 +11,7 @@ import com.bookmybus.Bookmybus.enity.Booking;
 import com.bookmybus.Bookmybus.enity.Bus;
 
 
-@Repository
+
 public interface BookingDao extends JpaRepository<Booking, Integer> {
 	@Query("select b from Booking b where b.user.userid =:id")
 	public List<Booking> myBookings(@Param("id") int userid);
