@@ -1,5 +1,11 @@
 package com.bookmybus.Bookmybus.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -8,11 +14,17 @@ import org.springframework.stereotype.Service;
 
 import com.bookmybus.Bookmybus.dao.BookingDao;
 import com.bookmybus.Bookmybus.dao.BusDao;
+import com.bookmybus.Bookmybus.dao.RouteDao;
+import com.bookmybus.Bookmybus.dao.UserDao;
 import com.bookmybus.Bookmybus.dto.BookingDTO;
 import com.bookmybus.Bookmybus.enity.Booking;
 import com.bookmybus.Bookmybus.enity.Bus;
+import com.bookmybus.Bookmybus.enity.Myuser;
+import com.bookmybus.Bookmybus.enity.Route;
+import com.bookmybus.Bookmybus.exception.DateOfJournrypassed;
 
 @Service
+@Transactional
 public class BookingService {
 
 	@Autowired
@@ -21,6 +33,16 @@ public class BookingService {
 	
 	@Autowired
 	private BusDao busDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private RouteDao routeDao;
+	
+	
+	@Autowired
+    private EmailSenderService emailSenderService;
 	
 	
 
@@ -36,9 +58,34 @@ public class BookingService {
 			
 			Bus bus=busDao.findById(bookingDTO.getBusid()).orElse(null);
 			
+			bus.setBookedSeat(bus.getBookedSeat()+1);
+			
+			busDao.save(bus);
+			
+			Myuser myuser=userDao.findById(bookingDTO.getUserid()).get();
 		
+			booking.setRoute(bus.getRoute());
+			
+			booking.setFareAmount(bus.getBusFare());
+			
+			booking.setUser(myuser);
+			
+			booking.setDateofBooking(LocalDate.now());
 			
 			booking.setBus(bus);
+			
+			System.out.println(booking.getFareAmount());
+			
+			String mess="Email-"+myuser.getEmail()
+			+"\n" +
+			"\n"+"Gender-"+myuser.getGender()+"\n"+"\n"+
+			"Mobile--"+myuser.getMobile()
+			+"Bus Name--"+bus.getBusName()+"\n"+
+			"From--"+bus.getRoute().getSource()+"\n"+
+			"To--"+bus.getRoute().getDestination()+
+			"\n"+"Date of journy-"+bookingDTO.getDateofJourny();
+			
+			emailSenderService.sendEmail(mess, "Booking Information", myuser.getEmail(), "bookmybuscdac@gmail.com");
 			
 			bookingDao.save(booking);
 		}catch (Exception e) {
@@ -48,6 +95,78 @@ public class BookingService {
 		}
 		
 		return "Booking added";
+	}
+
+
+
+	public List<Booking> myBookings(int userid) {
+		// TODO Auto-generated method stub
+		
+		Myuser myuser=userDao.findById(userid).get();
+		
+		List<Booking> list=bookingDao.myBookings(userid);
+		
+		return list;
+	}
+
+
+
+	public List<Booking> allBookings() {
+		// TODO Auto-generated method stub
+		List<Booking> list=bookingDao.findAll();
+		return list;
+	}
+
+
+
+	public List<Booking> ownerBookings(int userid) {
+		// TODO Auto-generated method stub
+		
+		Myuser myuser=userDao.findById(userid).get();
+		
+		List<Booking> re=new ArrayList<>();
+		
+		List<Bus> b=busDao.findByMyuser(myuser.getUserid());
+		
+		for (Bus bus : b) {
+			
+			List<Booking> b1=bookingDao.FindByBus(bus.getBusid());
+			re.addAll(b1);
+		}
+		
+		return re;
+	}
+
+
+
+	public Object myBookings1(int userid) {
+		// TODO Auto-generated method stub
+		
+		//bookingDao.deleteById(userid);
+		
+	LocalDate d=LocalDate.now();
+	
+	
+		
+		Booking booking=bookingDao.findById(userid).get();
+		
+		//if(d.isBefore(booking.getDateofJourny())) {
+		
+		//booking.setBus(null);
+		
+		//booking.setRoute(null);
+		
+	//	booking.setUser(null);
+		
+		//bookingDao.save(booking);
+		
+		bookingDao.deleteById(userid);
+		
+		
+		//bookingDao.de
+		return "deleted";
+		
+		
 	}
 	
 	

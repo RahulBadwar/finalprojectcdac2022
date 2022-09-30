@@ -7,9 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookmybus.Bookmybus.dao.BookingDao;
@@ -52,4 +57,29 @@ public class BookingController {
 		return new ResponseEntity<>(bookingService.addBooking(bookingDTO),HttpStatus.CREATED);
 	}
 	
+	@GetMapping("my-bookings/{userid}")
+	public ResponseEntity<?> myBookings(@PathVariable int userid ){
+		
+		return new ResponseEntity<>(bookingService.myBookings(userid),HttpStatus.OK);
+	}
+	
+	@GetMapping("view-bookings")
+	public ResponseEntity<?> allBookings(){
+		
+		return new ResponseEntity<>(bookingService.allBookings(),HttpStatus.OK);
+	}
+	
+	
+	@PutMapping("/view-bookings-owner")
+	public ResponseEntity<?> ownerBookings(@RequestBody int userid){
+		
+		return new ResponseEntity<>(bookingService.ownerBookings(userid),HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping("my-bookings/{userid}")
+	public ResponseEntity<?> myBookings1(@PathVariable int userid ){
+		
+		return new ResponseEntity<>(bookingService.myBookings1(userid),HttpStatus.OK);
+	}
 }

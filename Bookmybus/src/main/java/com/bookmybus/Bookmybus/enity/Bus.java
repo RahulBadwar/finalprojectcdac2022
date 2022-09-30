@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,9 +44,11 @@ public class Bus {
 	
 	private String busName;
 	
+	private String busType;
+	
 	private double busFare;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Booking> bookings = new ArrayList<>();
 	
