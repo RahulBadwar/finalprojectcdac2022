@@ -126,6 +126,8 @@ public class BookingService {
 		
 		List<Booking> re=new ArrayList<>();
 		
+		
+		
 		List<Bus> b=busDao.findByMyuser(myuser.getUserid());
 		
 		for (Bus bus : b) {
@@ -152,13 +154,13 @@ public class BookingService {
 		
 		//if(d.isBefore(booking.getDateofJourny())) {
 		
-		//booking.setBus(null);
+		booking.setBus(null);
 		
-		//booking.setRoute(null);
+		booking.setRoute(null);
 		
-	//	booking.setUser(null);
+	booking.setUser(null);
 		
-		//bookingDao.save(booking);
+		bookingDao.save(booking);
 		
 		bookingDao.deleteById(userid);
 		
